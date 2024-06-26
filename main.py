@@ -1,40 +1,33 @@
-# Criando os vetores
 riscos = ["Risco Baixo", "Risco Médio", "Risco Alto"]
 detentos = ["Pedro", "João", "Vazio"]
 
-# Iniciando uma matriz vazia
 matriz = []
 
-# Definindo o tamanho da matriz
 tamanho = 3
 
 
-# Criando a matriz com os elementos
 def criarMatriz():
     for l in range(tamanho):
-        linha = []  # Criando uma linha vazia
+        linha = []
         for c in range(tamanho):
             elemento = " "
-            linha.append(elemento)  # Adicionando o elemento à linha
-        matriz.append(linha)  # Adicionando a linha na matriz
-
+            linha.append(elemento)
+        matriz.append(linha)
     matriz[0][0] = "X"
     matriz[1][2] = "X"
 
 
-# Função do vetor riscos para usar no print da matriz
 def printRiscos():
     global stringFormatada
     riscosFormatado = []
     for elemento in riscos:
         if elemento == riscos[0]:
-            riscosFormatado.append(f"{elemento:>17}")  # >17 dá espaço à esquerda
+            riscosFormatado.append(f"{elemento:>17}")
         else:
             riscosFormatado.append(f"{elemento:>12}")
     stringFormatada = " ".join(riscosFormatado)
 
 
-# Printar a matriz completa
 def printMatriz():
     print("\n")
     print("============================================")
@@ -45,7 +38,6 @@ def printMatriz():
     print("============================================")
 
 
-# Função para cadastrar detento
 def primeiroCadastro():
     global detento
     global risco
@@ -85,7 +77,68 @@ def primeiroCadastro():
     print("Detento cadastrado com sucesso!")
 
 
-# Função de alterar nome do detento
+def escolherFuncao():
+    global escolha
+
+    print("\n")
+    print("O que deseja fazer?")
+    print("")
+    print("1 - Alterar dados na matriz")
+    print("2 - Pesquisar dados na matriz")
+    print("3 - Finalizar o programa e ver a matriz")
+    print("")
+    escolha = int(input("> "))
+
+    if escolha == 1:
+        alterarMatriz()
+    elif escolha == 2:
+        pesquisarMatriz()
+    elif escolha == 3:
+        printMatriz()
+    else:
+        print("\n")
+        print("============================================")
+        print("ERRO: Número inválido, escolha novamente.")
+        escolherFuncao()
+
+
+def alterarMatriz():
+    alteracao = 0
+
+    print("\n")
+    print("ALTERAÇÃO DE DADOS NA MATRIZ")
+    print("----------------------------")
+    print("")
+    print("Digite o número correspondente a qual dado deseja alterar.")
+    print("")
+    print("1 - Nome do detento")
+    print("2 - Risco do detento")
+    print("3 - Ambos")
+    print("")
+    alteracao = int(input("> "))
+
+    printMatriz()
+
+    if alteracao == 1:
+        alterarNomeDetento()
+        print("\n" * 2)
+        print("Os dados foram alterados com sucesso!")
+    elif alteracao == 2:
+        alterarRiscoDetento()
+        print("\n" * 2)
+        print("Os dados foram alterados com sucesso!")
+    elif alteracao == 3:
+        alterarAmbos()
+    else:
+        print("\n")
+        print("============================================")
+        print("ERRO: Número inválido, tente novamente.")
+        alterarMatriz()
+
+    printMatriz()
+    desejaAlterar()
+
+
 def alterarNomeDetento():
     global alterarDetento
     alterarNome = 0
@@ -122,13 +175,12 @@ def alterarNomeDetento():
     print("O nome do detento foi alterado com sucesso!")
 
 
-# Função auxiliar para alterar risco do detento
 def estruturaRiscoNovo():
     global indice
-    global novoRisco  # variavel indice sera indice -1 pra qual detento ele escolheu
+    global novoRisco
 
-    for posicao in range(3):  # Itera pelas 3 posições da linha do detento
-        if matriz[indice][posicao] == "X":  # Encontra a posição do "X"
+    for posicao in range(3):
+        if matriz[indice][posicao] == "X":
             if novoRisco == 1:
                 matriz[indice][posicao] = " "
                 matriz[indice][0] = "X"
@@ -145,7 +197,6 @@ def estruturaRiscoNovo():
                 alterarRiscoDetento()
 
 
-# Função para alterar risco do detento
 def alterarRiscoDetento():
     global indice
     global novoRisco
@@ -160,7 +211,7 @@ def alterarRiscoDetento():
     print("")
     alterarRisco = int(input("> "))
 
-    if alterarRisco == 1:  # Alterar risco do detento 1
+    if alterarRisco == 1:
         print("\n")
         print(f"Informe o novo risco do detento {detentos[0]}")
         print("")
@@ -172,7 +223,7 @@ def alterarRiscoDetento():
         indice = 0
         print("\n")
         estruturaRiscoNovo()
-    elif alterarRisco == 2:  # Alterar risco do detento 1
+    elif alterarRisco == 2:
         print("\n")
         print(f"Informe o novo risco do detento {detentos[1]}")
         print("")
@@ -184,7 +235,7 @@ def alterarRiscoDetento():
         indice = 1
         print("\n")
         estruturaRiscoNovo()
-    elif alterarRisco == 3:  # Alterar risco do detento 1
+    elif alterarRisco == 3:
         print("\n")
         print(f"Informe o novo risco do detento {detentos[2]}")
         print("")
@@ -205,185 +256,6 @@ def alterarRiscoDetento():
     print("O risco do detento foi alterado com sucesso!")
 
 
-# Função para escolher o que o usuário quer fazer na matriz
-def escolherFuncao():
-    global escolha
-
-    print("\n")
-    print("O que deseja fazer?")
-    print("")
-    print("1 - Alterar dados na matriz")
-    print("2 - Pesquisar dados na matriz")
-    print("3 - Finalizar o programa e ver a matriz")
-    print("")
-    escolha = int(input("> "))
-
-    if escolha == 1:
-        alterarMatriz()
-    elif escolha == 2:
-        pesquisarMatriz()
-    elif escolha == 3:
-        printMatriz()
-    else:
-        print("\n")
-        print("============================================")
-        print("ERRO: Número inválido, escolha novamente.")
-        escolherFuncao()
-
-
-# Função para alterar dados na matriz
-def alterarMatriz():
-    alteracao = 0
-
-    print("\n")
-    print("ALTERAÇÃO DE DADOS NA MATRIZ")
-    print("----------------------------")
-    print("")
-    print("Digite o número correspondente a qual dado deseja alterar.")
-    print("")
-    print("1 - Nome do detento")
-    print("2 - Risco do detento")
-    print("3 - Ambos")
-    print("")
-    alteracao = int(input("> "))
-
-    printMatriz()
-
-    if alteracao == 1:  # Alterar o nome do detento
-        alterarNomeDetento()
-        print("\n" * 2)
-        print("Os dados foram alterados com sucesso!")
-    elif alteracao == 2:  # Alterar o risco do detento
-        alterarRiscoDetento()
-        print("\n" * 2)
-        print("Os dados foram alterados com sucesso!")
-    elif alteracao == 3:
-        alterarAmbos()
-    else:
-        print("\n")
-        print("============================================")
-        print("ERRO: Número inválido, tente novamente.")
-        alterarMatriz()
-
-    printMatriz()
-    desejaAlterar()
-
-
-# Função de pesquisar qual risco é tal detento
-def pesquisarRiscoDetento():
-    print("\n")
-    print("Deseja saber o risco de qual detento?")
-    print("")
-    print(f"1 - {detentos[0]}")
-    print(f"2 - {detentos[1]}")
-    print(f"3 - {detentos[2]}")
-    print("")
-    escolhaDetento = int(input("> "))
-
-    if escolhaDetento == 1:
-        posicaoX = matriz[0].index("X")
-        match posicaoX:
-            case 0:
-                print("\n")
-                print("----------------------------------")
-                print(f"O detento {detentos[0]} tem {riscos[0]}")
-            case 1:
-                print("\n")
-                print("----------------------------------")
-                print(f"O detento {detentos[0]} tem {riscos[1]}")
-            case 2:
-                print("\n")
-                print("----------------------------------")
-                print(f"O detento {detentos[0]} tem {riscos[2]}")
-
-    elif escolhaDetento == 2:
-        posicaoX = matriz[1].index("X")
-        match posicaoX:
-            case 0:
-                print("\n")
-                print("----------------------------------")
-                print(f"O detento {detentos[1]} tem {riscos[0]}")
-            case 1:
-                print("\n")
-                print("----------------------------------")
-                print(f"O detento {detentos[1]} tem {riscos[1]}")
-            case 2:
-                print("\n")
-                print("----------------------------------")
-                print(f"O detento {detentos[1]} tem {riscos[2]}")
-    elif escolhaDetento == 3:
-        posicaoX = matriz[2].index("X")
-        match posicaoX:
-            case 0:
-                print("\n")
-                print("----------------------------------")
-                print(f"O detento {detentos[2]} tem {riscos[0]}")
-            case 1:
-                print("\n")
-                print("----------------------------------")
-                print(f"O detento {detentos[2]} tem {riscos[1]}")
-            case 2:
-                print("\n")
-                print("----------------------------------")
-                print(f"O detento {detentos[2]} tem {riscos[2]}")
-    else:
-        print("\n")
-        print("============================================")
-        print("ERRO: Número inválido, tente novamente.")
-        pesquisarRiscoDetento()
-    escolherFuncao()
-
-
-# Função para ver quantos detentos tem no risco escolhido
-def pesquisaRiscos():
-    x = 0
-    print("\n")
-    print("Escolha um risco para saber quantos detentos estão nele.")
-    print("")
-    print("1 - Risco Baixo")
-    print("2 - Risco Médio")
-    print("3 - Risco Alto")
-    print("")
-    escolhaRisco = int(input("> "))
-
-    if escolhaRisco > 0 and escolhaRisco < 4:
-        riscoEscolhido = escolhaRisco - 1
-
-        # Conta os "X" na coluna escolhida
-        for linha in matriz:
-            if linha[riscoEscolhido] == "X":
-                x += 1
-
-        print(f"Tem {x} detentos no Risco {escolhaRisco}.")
-    else:
-        print("\n")
-        print("============================================")
-        print("ERRO: Número inválido, tente novamente.")
-        pesquisaRiscos()
-    escolherFuncao()
-
-
-# Função para pesquisar dados na matriz
-def pesquisarMatriz():
-    print("\n")
-    print("Qual pesquisa deseja fazer?")
-    print("")
-    print("1 - Ver qual o risco de um detento")
-    print("2 - Ver quantos detentos tem determinado risco")
-    print("")
-    escolhaPesquisa = int(input("> "))
-
-    if escolhaPesquisa == 1:
-        pesquisarRiscoDetento()
-    elif escolhaPesquisa == 2:
-        pesquisaRiscos()
-    else:
-        print("\n")
-        print("============================================")
-        print("ERRO: Número inválido, tente novamente.")
-
-
-# Função para alterar o nome do detento e o risco
 def alterarAmbos():
     alterarNomeDetento()
     if alterarDetento < 1 and alterarDetento > 3:
@@ -396,7 +268,6 @@ def alterarAmbos():
         alterarRiscoDetento()
 
 
-# Função para perguntar se deseja alterar mais algum dado
 def desejaAlterar():
     conf = 0
 
@@ -420,12 +291,93 @@ def desejaAlterar():
         desejaAlterar()
 
 
+def pesquisarMatriz():
+    print("\n")
+    print("Qual pesquisa deseja fazer?")
+    print("")
+    print("1 - Ver qual o risco de um detento")
+    print("2 - Ver quantos detentos tem determinado risco")
+    print("")
+    escolhaPesquisa = int(input("> "))
+
+    if escolhaPesquisa == 1:
+        pesquisarRiscoDetento()
+    elif escolhaPesquisa == 2:
+        pesquisaRiscos()
+    else:
+        print("\n")
+        print("============================================")
+        print("ERRO: Número inválido, tente novamente.")
+
+
+def auxPesquisaRisco():
+    for z in range(3):
+        posicaoX = matriz[aux].index("X")
+    print("\n")
+    print("----------------------------------")
+    print(f"O detento {detentos[aux]} tem {riscos[posicaoX]}")
+
+
+def pesquisarRiscoDetento():
+    global aux
+    print("\n")
+    print("Deseja saber o risco de qual detento?")
+    print("")
+    print(f"1 - {detentos[0]}")
+    print(f"2 - {detentos[1]}")
+    print(f"3 - {detentos[2]}")
+    print("")
+    escolhaDetento = int(input("> "))
+
+    if escolhaDetento == 1:
+        aux = 0
+        auxPesquisaRisco()
+    elif escolhaDetento == 2:
+        aux = 1
+        auxPesquisaRisco()
+    elif escolhaDetento == 3:
+        aux = 2
+        auxPesquisaRisco()
+    else:
+        print("\n")
+        print("============================================")
+        print("ERRO: Número inválido, tente novamente.")
+        pesquisarRiscoDetento()
+    escolherFuncao()
+
+
+def pesquisaRiscos():
+    x = 0
+    print("\n")
+    print("Escolha um risco para saber quantos detentos estão nele.")
+    print("")
+    print("1 - Risco Baixo")
+    print("2 - Risco Médio")
+    print("3 - Risco Alto")
+    print("")
+    escolhaRisco = int(input("> "))
+
+    if escolhaRisco > 0 and escolhaRisco < 4:
+        riscoEscolhido = escolhaRisco - 1
+
+        for linha in matriz:
+            if linha[riscoEscolhido] == "X":
+                x += 1
+        print("")
+        print(f"Tem {x} detentos no Risco {escolhaRisco}.")
+    else:
+        print("\n")
+        print("============================================")
+        print("ERRO: Número inválido, tente novamente.")
+        pesquisaRiscos()
+    escolherFuncao()
+
+
 criarMatriz()
 primeiroCadastro()
-
 printRiscos()
-printMatriz()
 
+printMatriz()
 escolherFuncao()
 
 print("")
