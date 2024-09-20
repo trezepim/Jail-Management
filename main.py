@@ -379,8 +379,3 @@ printRiscos()
 
 printMatriz()
 escolherFuncao()
-
-print("")
-print("-------------------------------")
-print("  Mayara Hafez | Rafael Pim  ")
-print("\n")
